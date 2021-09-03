@@ -15,8 +15,8 @@ and negation `{ "!" }`.
 It ((can **simplify** and solve (multiple (**nested**))) and (separate (**logic groups**))) from the ((((**inside**)))) **out**.  
 It splits the problem respecting the correct operator precedence (tested this implementation against C# implementation).  
   
-Runs this [test class] and evaluates all **74** test expressions in total of **~3 milliseconds** even on my low-end Intel i5.  
-It uses **no Regular expressions** *(~10x)* and **no scripting engines** *(~100x)* as these are **way too slow**!  
+Runs this [test class] and evaluates all **74** test expressions in total of **under 1 millisecond!** Even on my low-end Intel i5.  
+It uses **no Regular expressions** *(~100x)* and **no scripting engines** *(~1000x)* as these are **way too slow**!  
 It's no C++ but I find it pretty good performance wise.  
   
 It is purpose build and therefore also safer than using scripting engines. Scripting engines potentially allow scripts to cause harm and to break-out. This could be used to hijack your machine by injecting malicious payloads. At least in my use-cases this is something I need to worry about.  
