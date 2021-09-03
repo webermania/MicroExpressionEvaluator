@@ -7,7 +7,7 @@ In my case, for dynamic and configurable rules that need to be constantly re-che
 Source of my expressions can be local or remote, contained in a json, yaml, xml, hcl or any format.
 
 ## My solution
-I wrote this simple and reliable .Net (Core 3.1) class library (in under 250 lines of code in [one class] using recursion) that can evaluate logic.  
+I wrote this simple and reliable .Net (Core 3.1) class library (in under 250 lines of code in **[one class]** using recursion) that can evaluate logic.  
   
 It can currently deal with types: `{ decimal, boolean, string }`.  
 It understands the following operators: `{ "||", "&&", "!=", "==", "<=", ">=", "<", ">" }`  
@@ -15,7 +15,7 @@ and negation `{ "!" }`.
 It ((can **simplify** and solve (multiple (**nested**))) and (separate (**logic groups**))) from the ((((**inside**)))) **out**.  
 It splits the problem respecting the correct operator precedence (tested this implementation against C# implementation).  
   
-Runs this [test class] and evaluates all **74** test expressions in total of **~0,2 milliseconds!** Even on my low-end Intel i5.  
+Runs this **[test class]** and evaluates all **74** test expressions in total of **~0,2 milliseconds!** Even on my low-end Intel i5.  
 It uses **no Regular expressions** *(~100x)* and **no scripting engines** *(~1000x)* as these are **way too slow**!  
 It's no C++ but I find it pretty good performance wise.  
   
