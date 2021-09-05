@@ -1,5 +1,5 @@
 # MicroExpressionEvaluator
-Interpret and evaluate logic expressions represented **as string** (very quickly) and return evaluation success or throw Exception with clear Error message.
+Interpret and evaluate logic rule expressions represented **as string** (very quickly) and return evaluation success or throw Exception with clear Error message.
 
 ## My problem
 I needed something **`really fast (and low on CPU)`** at solving rules with dynamic conditions.  
