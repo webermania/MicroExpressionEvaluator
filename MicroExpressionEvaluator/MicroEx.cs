@@ -22,7 +22,7 @@ namespace MicroExpressionEvaluator
 
         private static bool ContainsAnyOperators(string expr)
         {
-            return new[] { "||", "&&", "!=", "==", "<=", ">=", "<", ">" }.Any(expr.Contains); ;
+            return new[] { "||", "&&", "!=", "==", "<=", ">=", "<", ">" }.Any(expr.Contains);
         }
 
         /// <summary>
