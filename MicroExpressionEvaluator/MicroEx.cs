@@ -22,11 +22,11 @@ namespace MicroExpressionEvaluator
 
         private static bool ContainsAnyOperators(string expr)
         {
-            return new[] { "||", "&&", "!=", "==", "<=", ">=", "<", ">" }.Any(expr.Contains); ;
+            return new[] {"||", "&&", "!=", "==", "<=", ">=", "<", ">"}.Any(expr.Contains);
         }
 
         /// <summary>
-        /// Solves nested groups from the ((((inside)))) out
+        ///     Solves nested groups from the ((((inside)))) out
         /// </summary>
         private static bool SimplifyAndSolveExpression(string expr)
         {
@@ -60,7 +60,7 @@ namespace MicroExpressionEvaluator
                     // found a (group) that has (no (deeper nested) group)
                     var subExpr = potentialGroupX.Substring(0, nextCloseBracket);
                     var subResult = SplitAndValidateLogicalOperators(subExpr);
-                    
+
                     var simplifiedExpr = expr.Replace($"({subExpr})", subResult.ToString().ToLower());
                     return SimplifyAndSolveExpression(simplifiedExpr);
                 }
@@ -70,8 +70,8 @@ namespace MicroExpressionEvaluator
         }
 
         /// <summary>
-        /// Splits the problem respecting the correct operator precedence.
-        /// (Testsed against C# implementation.)
+        ///     Splits the problem respecting the correct operator precedence.
+        ///     (Testsed against C# implementation.)
         /// </summary>
         private static bool SplitAndValidateLogicalOperators(string expr)
         {
