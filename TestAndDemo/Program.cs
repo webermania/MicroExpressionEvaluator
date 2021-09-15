@@ -1,7 +1,18 @@
-﻿using System;
+﻿//
+//     Webermania
+//     © 2021 Christopher Weber
+//     Apache-2.0 License
+//     https://github.com/webermania/MicroExpressionEvaluator
+//     https://www.nuget.org/packages/MicroExpressionEvaluator
+//
+//     This ("TestAndDemo") project is only for effective testing and demonstration of the MicroExpressionEvaluator
+//     and was not meant to be beautiful
+//
+
+using System;
 using System.Linq;
 using MicroExpressionEvaluator;
-using Microsoft.CodeAnalysis.CSharp.Scripting; // <-- No need for Scripting!!! Just to compare with and test against.
+using Microsoft.CodeAnalysis.CSharp.Scripting; // <-- We do NOT need the Microsoft CSharpScript Engine! We use it here only to collect expected results for later comparison.
 
 namespace TestAndDemo
 {
@@ -117,6 +128,7 @@ namespace TestAndDemo
             Console.WriteLine("--- Will now perform the 1st test set with Microsoft Scripting engine to collect expected results: ");
 
             // Pre-heating. Makes a big difference when everything has been loaded once before!
+            // We do NOT need the Microsoft CSharpScript Engine! We use it here only to collect expected results for later comparison.
             string preHeatTestExp = "true == (true != false)";
             var preHeat1Result = CSharpScript.EvaluateAsync(preHeatTestExp).Result;
 
@@ -126,6 +138,7 @@ namespace TestAndDemo
 
             for (var i = 0; i < testSet1.Length; i++)
             {
+                // We do NOT need the Microsoft CSharpScript Engine! We use it here only to collect expected results for later comparison.
                 var result = CSharpScript.EvaluateAsync(testSet1[i].expression).Result;
 
                 if (result is ValueTuple<long, bool, int>)
@@ -142,6 +155,7 @@ namespace TestAndDemo
             Console.WriteLine("--- Will now perform the 1st test set with our MicroExpressionEvaluator to compare results: ");
 
             // Pre-heating. Makes a big difference when everything has been loaded once before!
+            // This is where we call our MicroExpressionEvaluator
             var preHeat2Result = MicroEx.Evaluate(preHeatTestExp);
 
             var start_tests2 = DateTime.Now;

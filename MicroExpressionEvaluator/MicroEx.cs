@@ -1,4 +1,15 @@
-﻿using System;
+﻿//
+//     Webermania
+//     © 2021 Christopher Weber
+//     Apache-2.0 License
+//     https://github.com/webermania/MicroExpressionEvaluator
+//     https://www.nuget.org/packages/MicroExpressionEvaluator
+//
+//     This ("MicroExpressionEvaluator") interprets and evaluates logic expressions represented as
+//     string (very quickly) and returns evaluation success or throws Exception with clear Error message.
+//
+
+using System;
 using System.Linq;
 
 namespace MicroExpressionEvaluator
@@ -12,6 +23,11 @@ namespace MicroExpressionEvaluator
             return expression.Replace(placeHolder, value);
         }
 
+        /// <summary>
+        /// interprets and evaluates logic expressions represented as string
+        /// </summary>
+        /// <param name="expression">Input expression such as "(\"text123\" == \"text123\") && (7 <= 8)"</param>
+        /// <returns>returns evaluation success as bool or throws Exception with clear a Error message
         public static bool Evaluate(string expression)
         {
             if (string.IsNullOrWhiteSpace(expression))
@@ -185,6 +201,7 @@ namespace MicroExpressionEvaluator
             if (val.StartsWith('!'))
                 return !ValidateBool(val.Substring(1, val.Length - 1));
 
+            // .net Convert.ToBoolean no good here
             if (val.Equals("true", StringComparison))
                 return true;
 
