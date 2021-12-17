@@ -7,25 +7,18 @@ In my case, for dynamic and configurable rules that need to be constantly re-che
 Source of my expressions can be local or remote, contained in a json, yaml, xml, hcl or any format.
 
 ## My solution
-I wrote this simple and reliable .Net (Core 3.1) class library (in under 250 lines of code in [one class] using recursion) that can evaluate logic.  
+I wrote this .Net (Core 3.1) class library (in under 250 lines of code in [one class] using recursion) to evaluate logic.  
   
 It can currently deal with types: `{ decimal, boolean, string }`.  
 It understands the following operators: `{ "||", "&&", "!=", "==", "<=", ">=", "<", ">" }`  
 and negation `{ "!" }`.  
+
 It ((can **simplify** and solve (multiple (**nested**))) and (separate (**logic groups**))) from the ((((**inside**)))) **out**.  
 It splits the problem respecting the correct operator precedence (tested this implementation against C# implementation).  
   
 Runs this [test class] and evaluates all **74** test expressions in total of **~0,2 milliseconds!** Even on my low-end Intel i5.  
 It uses **no Regular expressions** *(~100x)* and **no scripting engines** *(~1000x)* as these are **way too slow**!  
 It's no C++ but I find it pretty good performance wise.  
-  
-It is purpose build and therefore also safer than using scripting engines. Scripting engines potentially allow scripts to cause harm and to break-out. This could be used to hijack your machine by injecting malicious payloads. At least in my use-cases this is something I need to worry about.  
-  
-It required **no libs, or 3rd party packages**, just standard and clean .Net.  
-It can easily be adapted to other .Net versions or languages (TBD).  
-  
-For now, it only does logic and cannot yet solve math problems (TBD).  
-Adding other operators, as for example: `{ "+", "-", "*", "/", "^", "%" }` to solve simple (or more complex) math would be easy using this as a base framework.
 
 ## Example **In-** *--and-->* **Output**
 It is **very low on CPU and super-fast** at solving expressions such as:
@@ -55,6 +48,16 @@ For example, I would have rules such as the following and replace the placeholde
 %CXB% == true && (%OOP% == "ACTIVE" || %OOP% == "STANDBY")
 %PRE% >= 29,25 && %PRE% <= 78,5
 ```
+
+## Info
+It is purpose build and therefore also safer than using scripting engines. Scripting engines potentially allow scripts to cause harm and to break-out. This could be used to hijack your machine by injecting malicious payloads. At least in my use-cases this is something I need to worry about.  
+  
+It required **no extra libs, or 3rd party packages**.
+
+It can easily be adapted to other .Net versions or languages (TBD).  
+  
+For now, it only does logic and cannot yet solve math problems (TBD).  
+Adding other operators, as for example: `{ "+", "-", "*", "/", "^", "%" }` to solve simple (or more complex) math would be easy using this as a base framework.
 
 ## Alternatives
 These really cool projects did not work for me, or were just **too slow**:
