@@ -19,6 +19,7 @@ It splits the problem respecting the correct operator precedence (tested this im
 Runs this [test class] and evaluates all **74** test expressions in total of **~0,2 milliseconds!** Even on my low-end Intel i5.  
 It uses **no Regular expressions** *(~100x)* and **no scripting engines** *(~1000x)* as these are **way too slow**!  
 It's no C++ but I find it pretty good performance wise.  
+
 The [test class] evaluates and compares our results and performance of all 74 tests against the ".NET Compiler Platform" (aka "Roslyn") ("Microsoft.CodeAnalysis.CSharp.Scripting.EvaluateAsync()")
 
 ## Example **In-** *--and-->* **Output**
