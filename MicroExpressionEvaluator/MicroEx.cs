@@ -158,7 +158,7 @@ namespace MicroExpressionEvaluator
 
                 if (part1GoesDeeper || part2GoesDeeper)
                     throw new Exception(
-                        $"Invalid input:'{expr}'! Operator '<=' cannot be applied to operands of type 'bool' and 'object'.");
+                        $"Invalid input:'{expr}'! Operator '<=' cannot be applied to operands of type 'bool' and 'unknown object'.");
 
                 return Convert.ToDecimal(op6[0]) <= Convert.ToDecimal(op6[1]);
             }
@@ -172,7 +172,7 @@ namespace MicroExpressionEvaluator
 
                 if (part1GoesDeeper || part2GoesDeeper)
                     throw new Exception(
-                        $"Invalid input:'{expr}'! Operator '>' cannot be applied to operands of type 'bool' and 'object'.");
+                        $"Invalid input:'{expr}'! Operator '>' cannot be applied to operands of type 'bool' and 'unknown object'.");
 
                 return Convert.ToDecimal(op7[0]) > Convert.ToDecimal(op7[1]);
             }
@@ -186,7 +186,7 @@ namespace MicroExpressionEvaluator
 
                 if (part1GoesDeeper || part2GoesDeeper)
                     throw new Exception(
-                        $"Invalid input:'{expr}'! Operator '<' cannot be applied to operands of type 'bool' and 'object'.");
+                        $"Invalid input:'{expr}'! Operator '<' cannot be applied to operands of type 'bool' and 'unknown object'.");
 
                 return Convert.ToDecimal(op8[0]) < Convert.ToDecimal(op8[1]);
             }
@@ -201,7 +201,7 @@ namespace MicroExpressionEvaluator
             if (val.StartsWith('!'))
                 return !ValidateBool(val.Substring(1, val.Length - 1));
 
-            // .net Convert.ToBoolean no good here
+            // .net System.Convert.ToBoolean no good here
             if (val.Equals("true", StringComparison))
                 return true;
 
@@ -221,7 +221,7 @@ namespace MicroExpressionEvaluator
 
             if (val1HasStringFlag != val2HasStringFlag)
                 throw new Exception(
-                    $"Invalid input i1:'{val1}' i2:'{val1}'! Operator cannot be applied to operands of type 'string' and 'object'.");
+                    $"Invalid input i1:'{val1}' i2:'{val1}'! Operator cannot be applied to operands of type 'string' and 'unknown object'.");
 
             if (val1HasStringFlag)
                 return val1.Equals(val2, StringComparison);
@@ -231,7 +231,7 @@ namespace MicroExpressionEvaluator
 
             if (val1IsDec != val2IsDec)
                 throw new Exception(
-                    $"Invalid input i1:'{val1}' i2:'{val1}'! Operator cannot be applied to operands of type 'decimal' and 'object'.");
+                    $"Invalid input i1:'{val1}' i2:'{val1}'! Operator cannot be applied to operands of type 'decimal' and 'unknown object'.");
 
             if (val1IsDec)
                 return val1Dec == val2Dec;
