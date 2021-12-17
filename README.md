@@ -77,5 +77,5 @@ I created this a while ago, but finally managed to make the repo public.
 **I hope this can help you!!**  
 Enjoy and let me know what you like, dislike or what you would do differently  
 
-   [one class]: <https://github.com/webermania/MicroExpressionEvaluator/blob/master/MicroExpressionEvaluator/MicroEx.cs>
+   [one simple class]: <https://github.com/webermania/MicroExpressionEvaluator/blob/master/MicroExpressionEvaluator/MicroEx.cs>
    [test class]: <https://github.com/webermania/MicroExpressionEvaluator/blob/master/TestAndDemo/Program.cs>
