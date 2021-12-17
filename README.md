@@ -1,5 +1,5 @@
 # MicroExpressionEvaluator
-Parse, interpret and evaluate nested conditional logic expressions and operators represented as string (very quickly) and returns result or error. Sample input: false != true && !(-0,2 <= 0,1 || "a" == "b") 
+Parse, interpret and evaluate nested conditional logic expressions and operators represented as string (very quickly) and return result or error. Sample input: false != true && !(-0,2 <= 0,1 || "a" == "b") 
 
 ## My problem
 I needed something **`really fast (and low on CPU)`** at solving rules with dynamic conditions.  
