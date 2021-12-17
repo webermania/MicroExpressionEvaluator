@@ -50,7 +50,7 @@ For example, I would have rules such as the following and replace the placeholde
 ```
 
 ## Info
-It is purpose build and therefore also safer than using scripting engines. Scripting engines potentially allow scripts to cause harm and to break-out. This could be used to hijack your machine by injecting malicious payloads. At least in my use-cases this is something I need to worry about.  
+It is purpose build and therefore also safer than using scripting engines. Scripting engines potentially allow scripts to cause harm and to break-out. This could be used to hijack your machine by injecting malicious payloads. At least in my use-cases this is something I needed to worry about.  
   
 It required **no extra libs, or 3rd party packages**.
 
