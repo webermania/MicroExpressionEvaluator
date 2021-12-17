@@ -43,6 +43,12 @@ true == true != false                                       -->   Returns: true
 "text123" == true                                           -->   Throws (expected) exception: "Invalid input! Operator can only be applied to operands of type 'bool'."
 ```
 
+## Usage
+as simple as:
+```sh
+bool result = MicroEx.Evaluate("(true || false) && false");
+```
+
 ## Real life examples
 For example, I would have rules such as the following and replace the placeholders `%xxx%` with live values from variables then evaluate:
 ```sh
