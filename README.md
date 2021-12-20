@@ -11,7 +11,7 @@ I wrote this .Net (Core 3.1) class library (in [one simple class], in under 250 
   
 It can currently deal with types: `{ decimal, boolean, string }`.  
 It understands the following operators: `{ "||", "&&", "!=", "==", "<=", ">=", "<", ">" }`  
-and negation `{ "!" }`.  
+and logical NOT `{ "!" }`.  
 
 It ((can **simplify** and solve (multiple (**nested**))) and (separate (**logic groups**))) from the ((((**inside**)))) **out**.  
 It splits the problem respecting the correct operator precedence (tested this implementation against C# implementation).  
