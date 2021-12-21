@@ -18,11 +18,6 @@ namespace MicroExpressionEvaluator
     {
         public static StringComparison StringComparison { get; set; } = StringComparison.Ordinal;
 
-        public static string PopulateExpressionVariable(string expression, string placeHolder, string value)
-        {
-            return expression.Replace(placeHolder, value);
-        }
-
         /// <summary>
         /// interprets and evaluates logic expressions represented as string
         /// </summary>
