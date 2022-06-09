@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MicroExpressionEvaluatorDotNetFramework\MicroExpressionEvaluatorDotNetFramework.csproj" />
     <ProjectReference Include="..\MicroExpressionEvaluator\MicroExpressionEvaluator.csproj" />
   </ItemGroup>
 

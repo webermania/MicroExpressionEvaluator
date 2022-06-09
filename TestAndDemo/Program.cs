@@ -11,7 +11,8 @@
 
 using System;
 using System.Linq;
-using MicroExpressionEvaluator;
+//using MicroExpressionEvaluator;
+using MicroExpressionEvaluatorDotNetFramework;
 using Microsoft.CodeAnalysis.CSharp.Scripting; // <-- We do NOT need the Microsoft CSharpScript Engine! We use it here only to collect expected results for later comparison.
 
 namespace TestAndDemo
