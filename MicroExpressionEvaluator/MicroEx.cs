@@ -81,21 +81,52 @@ namespace MicroExpressionEvaluator
         }
 
         /// <summary>
+        ///     Fast and simple way to split into only two pieces
+        /// </summary>
+        /// <param name="source">string to be split</param>
+        /// <param name="separator">what to split by</param>
+        /// <returns>string array of result(s)</returns>
+        private static string[] SplitOnce(string source, string separator)
+        {
+            //return source.Split(separator, 2, StringSplitOptions.RemoveEmptyEntries);
+
+            if (string.IsNullOrWhiteSpace(source))
+                return new string[] { };
+
+            source = source.Trim();
+
+            if (string.IsNullOrWhiteSpace(separator))
+                return new string[] { source };
+
+            if (!source.Contains(separator))
+                return new string[] { source };
+
+            var position = source.IndexOf(separator, 0, StringComparison);
+            var before = source.Substring(0, position).Trim();
+            var after = source.Substring(position + separator.Length).Trim();
+
+            if (string.IsNullOrWhiteSpace(after))
+                return new string[] { before };
+
+            return new string[] { before, after };
+        }
+
+        /// <summary>
         ///     Splits the problem respecting the correct operator precedence.
         ///     (Testsed against C# implementation.)
         /// </summary>
         private static bool SplitAndValidateLogicalOperators(string expr)
         {
             // ||
-            var op1 = expr.Split("||", 2, StringSplitOptions.RemoveEmptyEntries);
+            var op1 = SplitOnce(expr, "||");
             if (op1.Length > 1) return op1.Any(SimplifyAndSolveExpression);
 
             // &&
-            var op2 = expr.Split("&&", 2, StringSplitOptions.RemoveEmptyEntries);
+            var op2 = SplitOnce(expr, "&&");
             if (op2.Length > 1) return op2.All(SimplifyAndSolveExpression);
 
             // !=
-            var op3 = expr.Split("!=", 2, StringSplitOptions.RemoveEmptyEntries);
+            var op3 = SplitOnce(expr, "!=");
             if (op3.Length > 1)
             {
                 var part1GoesDeeper = ContainsAnyOperators(op3[0]);
@@ -113,7 +144,7 @@ namespace MicroExpressionEvaluator
             }
 
             // ==
-            var op4 = expr.Split("==", 2, StringSplitOptions.RemoveEmptyEntries);
+            var op4 = SplitOnce(expr, "==");
             if (op4.Length > 1)
             {
                 var part1GoesDeeper = ContainsAnyOperators(op4[0]);
@@ -131,7 +162,7 @@ namespace MicroExpressionEvaluator
             }
 
             // >=
-            var op5 = expr.Split(">=", 2, StringSplitOptions.RemoveEmptyEntries);
+            var op5 = SplitOnce(expr, ">=");
             if (op5.Length > 1)
             {
                 var part1GoesDeeper = ContainsAnyOperators(op5[0]);
@@ -145,7 +176,7 @@ namespace MicroExpressionEvaluator
             }
 
             // <=
-            var op6 = expr.Split("<=", 2, StringSplitOptions.RemoveEmptyEntries);
+            var op6 = SplitOnce(expr, "<=");
             if (op6.Length > 1)
             {
                 var part1GoesDeeper = ContainsAnyOperators(op6[0]);
@@ -159,7 +190,7 @@ namespace MicroExpressionEvaluator
             }
 
             // >
-            var op7 = expr.Split(">", 2, StringSplitOptions.RemoveEmptyEntries);
+            var op7 = SplitOnce(expr, ">");
             if (op7.Length > 1)
             {
                 var part1GoesDeeper = ContainsAnyOperators(op7[0]);
@@ -173,7 +204,7 @@ namespace MicroExpressionEvaluator
             }
 
             // <
-            var op8 = expr.Split("<", 2, StringSplitOptions.RemoveEmptyEntries);
+            var op8 = SplitOnce(expr, "<");
             if (op8.Length > 1)
             {
                 var part1GoesDeeper = ContainsAnyOperators(op8[0]);

@@ -33,7 +33,7 @@ namespace MicroExpressionEvaluatorDotNetFramework
 
         private static bool ContainsAnyOperators(string expr)
         {
-            return new[] {"||", "&&", "!=", "==", "<=", ">=", "<", ">"}.Any(expr.Contains);
+            return new[] { "||", "&&", "!=", "==", "<=", ">=", "<", ">" }.Any(expr.Contains);
         }
 
         /// <summary>
@@ -88,7 +88,9 @@ namespace MicroExpressionEvaluatorDotNetFramework
         /// <returns>string array of result(s)</returns>
         private static string[] SplitOnce(string source, string separator)
         {
-            if(string.IsNullOrWhiteSpace(source))
+            //return source.Split(separator, 2, StringSplitOptions.RemoveEmptyEntries);
+
+            if (string.IsNullOrWhiteSpace(source))
                 return new string[] { };
 
             source = source.Trim();
@@ -102,7 +104,10 @@ namespace MicroExpressionEvaluatorDotNetFramework
             var position = source.IndexOf(separator, 0, StringComparison);
             var before = source.Substring(0, position).Trim();
             var after = source.Substring(position + separator.Length).Trim();
-            
+
+            if (string.IsNullOrWhiteSpace(after))
+                return new string[] { before };
+
             return new string[] { before, after };
         }
 
