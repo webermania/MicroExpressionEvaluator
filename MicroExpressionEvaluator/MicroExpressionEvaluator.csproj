@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Christopher Weber</Authors>
     <Company>Webermania</Company>
-    <Copyright>© 2021 Christopher Weber</Copyright>
+    <Copyright>© 2022 Christopher Weber</Copyright>
     <PackageProjectUrl>https://github.com/webermania/MicroExpressionEvaluator</PackageProjectUrl>
     <PackageLicenseExpression></PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -14,7 +14,7 @@
     <Title>MicroExpressionEvaluator</Title>
     <PackageTags>fast performance interpreter string script dynamic logic recursion expression operator evaluator precedence</PackageTags>
     <Description>Interpret and evaluate logic rule expressions represented as string (very quickly) and return evaluation success or throw Exception with clear Error message.</Description>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <ApplicationIcon>xnor.ico</ApplicationIcon>
     <PackageIcon>xnor.png</PackageIcon>
