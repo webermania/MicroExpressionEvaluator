@@ -15,7 +15,7 @@ The MicroExpressionEvaluator is a highly efficient .NET class library, optimized
 
 ## Performance Advantage
 
-Benchmarked to outperform traditional methods and tools, the MicroExpressionEvaluator avoids slow methods like regular expressions (about **100x** faster) and scripting engines (around **1000x** faster), making it a superior choice for applications requiring high-speed logic processing.
+Benchmarked to outperform traditional methods and tools, the MicroExpressionEvaluator avoids slow methods like regular expressions (about **100x**) and scripting engines (around **1000x**), making it a superior choice for applications requiring high-speed logic processing.
 
 ## Usage
 
