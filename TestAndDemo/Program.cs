@@ -1,6 +1,6 @@
 ﻿//
 //     Webermania
-//     © 2021 Christopher Weber
+//     © 2024 Christopher Weber
 //     Apache-2.0 License
 //     https://github.com/webermania/MicroExpressionEvaluator
 //     https://www.nuget.org/packages/MicroExpressionEvaluator
@@ -9,10 +9,7 @@
 //     and was not meant to be beautiful
 //
 
-using System;
-using System.Linq;
-//using MicroExpressionEvaluator;
-using MicroExpressionEvaluatorDotNetFramework;
+using MicroExpressionEvaluator;
 using Microsoft.CodeAnalysis.CSharp.Scripting; // <-- We do NOT need the Microsoft CSharpScript Engine! We use it here only to collect expected results for later comparison.
 
 namespace TestAndDemo
@@ -30,7 +27,7 @@ namespace TestAndDemo
             Console.WriteLine("");
             Console.WriteLine("--- Will now load the test sets: ");
 
-            var testSet1 = new (string expression, string expectedResult, string actualResult, bool success)[]
+            (string expression, string expectedResult, string actualResult, bool success)[] testSet1 = new (string expression, string expectedResult, string actualResult, bool success)[]
             {
                 ("true", "", "", false),
                 ("false", "", "", false),
@@ -109,7 +106,7 @@ namespace TestAndDemo
             };
 
             // Expecting errors (exceptions) for the following tests:
-            var testSet2 = new (string expression, string expectedResult, string actualResult, bool success)[]
+            (string expression, string expectedResult, string actualResult, bool success)[] testSet2 = new (string expression, string expectedResult, string actualResult, bool success)[]
             {
                 ("-7 && 7", "", "", false),
                 ("2 < 3 < 4", "", "", false),
@@ -131,24 +128,21 @@ namespace TestAndDemo
             // Pre-heating. Makes a big difference when everything has been loaded once before!
             // We do NOT need the Microsoft CSharpScript Engine! We use it here only to collect expected results for later comparison.
             string preHeatTestExp = "true == (true != false)";
-            var preHeat1Result = CSharpScript.EvaluateAsync(preHeatTestExp).Result;
+            object preHeat1Result = CSharpScript.EvaluateAsync(preHeatTestExp).Result;
 
-            var fail1Count = 0;
-            var fail2Count = 0;
-            var start_tests1 = DateTime.Now;
+            int fail1Count = 0;
+            int fail2Count = 0;
+            DateTime start_tests1 = DateTime.Now;
 
-            for (var i = 0; i < testSet1.Length; i++)
+            for (int i = 0; i < testSet1.Length; i++)
             {
                 // We do NOT need the Microsoft CSharpScript Engine! We use it here only to collect expected results for later comparison.
-                var result = CSharpScript.EvaluateAsync(testSet1[i].expression).Result;
+                object result = CSharpScript.EvaluateAsync(testSet1[i].expression).Result;
 
-                if (result is ValueTuple<long, bool, int>)
-                    testSet1[i].expectedResult = ((ValueTuple<long, bool, int>) result).Item2.ToString();
-                else
-                    testSet1[i].expectedResult = result.ToString();
+                testSet1[i].expectedResult = result is ValueTuple<long, bool, int> ? ((ValueTuple<long, bool, int>)result).Item2.ToString() : result.ToString();
             }
 
-            var diff1 = DateTime.Now - start_tests1;
+            TimeSpan diff1 = DateTime.Now - start_tests1;
 
             Console.WriteLine($"Completed all:({testSet1.Length}) tests in:({diff1.TotalMilliseconds}) milliseconds");
             Console.WriteLine("");
@@ -157,11 +151,11 @@ namespace TestAndDemo
 
             // Pre-heating. Makes a big difference when everything has been loaded once before!
             // This is where we call our MicroExpressionEvaluator
-            var preHeat2Result = MicroEx.Evaluate(preHeatTestExp);
+            bool preHeat2Result = MicroEx.Evaluate(preHeatTestExp);
 
-            var start_tests2 = DateTime.Now;
+            DateTime start_tests2 = DateTime.Now;
 
-            for (var i = 0; i < testSet1.Length; i++)
+            for (int i = 0; i < testSet1.Length; i++)
             {
                 // This is where we call our MicroExpressionEvaluator
                 testSet1[i].actualResult = MicroEx.Evaluate(testSet1[i].expression).ToString();
@@ -176,17 +170,17 @@ namespace TestAndDemo
                 fail1Count++;
             }
 
-            var diff2 = DateTime.Now - start_tests2;
+            TimeSpan diff2 = DateTime.Now - start_tests2;
 
             Console.WriteLine($"Completed all:({testSet1.Length}) tests in:({diff2.TotalMilliseconds}) milliseconds. FailedCount:({fail1Count})");
 
-            foreach (var testX in testSet1.Where(n => !n.success))
+            foreach ((string expression, string expectedResult, string actualResult, bool success) in testSet1.Where(n => !n.success))
             {
                 Console.WriteLine("");
                 Console.WriteLine($"    ---FAIL!---");
-                Console.WriteLine($"    expression:{testX.expression}");
-                Console.WriteLine($"    expectedResult:{TruncStr(testX.expectedResult)}");
-                Console.WriteLine($"    actualResult:{TruncStr(testX.actualResult)}");
+                Console.WriteLine($"    expression:{expression}");
+                Console.WriteLine($"    expectedResult:{TruncStr(expectedResult)}");
+                Console.WriteLine($"    actualResult:{TruncStr(actualResult)}");
             }
 
             Console.WriteLine("");
@@ -197,9 +191,9 @@ namespace TestAndDemo
             Console.WriteLine("");
             Console.WriteLine("--- Will now perform the 2nd test set with Microsoft Scripting engine to collect expected results: ");
 
-            var start_tests3 = DateTime.Now;
+            DateTime start_tests3 = DateTime.Now;
 
-            for (var i = 0; i < testSet2.Length; i++)
+            for (int i = 0; i < testSet2.Length; i++)
             {
                 try
                 {
@@ -211,16 +205,16 @@ namespace TestAndDemo
                 }
             }
 
-            var diff3 = DateTime.Now - start_tests3;
+            TimeSpan diff3 = DateTime.Now - start_tests3;
 
             Console.WriteLine($"Completed all:({testSet2.Length}) tests in:({diff3.TotalMilliseconds}) milliseconds");
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("--- Will now perform the 2nd test set with our MicroExpressionEvaluator to compare results: ");
 
-            var start_tests4 = DateTime.Now;
+            DateTime start_tests4 = DateTime.Now;
 
-            for (var i = 0; i < testSet2.Length; i++)
+            for (int i = 0; i < testSet2.Length; i++)
             {
                 try
                 {
@@ -250,17 +244,17 @@ namespace TestAndDemo
                 fail2Count++;
             }
 
-            var diff4 = DateTime.Now - start_tests4;
+            TimeSpan diff4 = DateTime.Now - start_tests4;
 
             Console.WriteLine($"Completed all:({testSet2.Length}) tests in:({diff4.TotalMilliseconds}) milliseconds. FailedCount:({fail2Count})");
 
-            foreach (var testX in testSet2.Where(n => !n.success))
+            foreach ((string expression, string expectedResult, string actualResult, bool success) in testSet2.Where(n => !n.success))
             {
                 Console.WriteLine("");
                 Console.WriteLine($"    ---FAIL!---");
-                Console.WriteLine($"    expression:{testX.expression}");
-                Console.WriteLine($"    expectedResult:{TruncStr(testX.expectedResult)}");
-                Console.WriteLine($"    actualResult:{TruncStr(testX.actualResult)}");
+                Console.WriteLine($"    expression:{expression}");
+                Console.WriteLine($"    expectedResult:{TruncStr(expectedResult)}");
+                Console.WriteLine($"    actualResult:{TruncStr(actualResult)}");
             }
 
             Console.WriteLine("");
@@ -268,16 +262,18 @@ namespace TestAndDemo
             Console.WriteLine("---Testing completed---");
             Console.WriteLine("-----------------------");
 
-            Console.ReadLine();
+            _ = Console.ReadLine();
         }
 
         public static string TruncStr(string val)
         {
             if (string.IsNullOrWhiteSpace(val))
+            {
                 return val;
+            }
 
             int max = 60;
-            return val.Length <= max ? val : val.Substring(0, max);
+            return val.Length <= max ? val : val[..max];
         }
     }
 }
