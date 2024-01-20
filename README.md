@@ -1,29 +1,34 @@
-# MicroExpressionEvaluator
-Parse, interpret and evaluate nested conditional logic expressions and operators represented as string (very quickly) and return result or error. Sample input: false != true && !(-0,2 <= 0,1 || "a" == "b") 
 
-## My problem
-I needed something **`really fast (and low on CPU)`** at solving rules with dynamic conditions.  
-In my case, for dynamic and configurable rules that need to be constantly re-checked at (near) real-time.  
-Source of my expressions can be local or remote, contained in a json, yaml, xml, hcl or any format.
+# C# MicroExpressionEvaluator: High-Performance Logic Parsing for Real-Time Applications
 
-## My solution
-I wrote this .Net class library (in [one simple class], in under 250 lines of code, with help of recursive functions) to evaluate logic expressions.  
-  
-It can currently deal with types: `{ decimal, boolean, string }`.  
-It understands the following operators: `{ "||", "&&", "!=", "==", "<=", ">=", "<", ">" }`  
-and logical NOT `{ "!" }`.  
+## Overview
 
-It ((can **simplify** and solve (multiple (**nested**))) and (separate (**logic groups**))) from the ((((**inside**)))) **out**.  
-It splits the problem respecting the correct operator precedence (tested this implementation against C# implementation).  
-  
-Runs this [test class] and evaluates all **74** test expressions in total of **~0,2 milliseconds!** Even on my low-end Intel i5.  
-It uses **no Regular expressions** *(~100x)* and **no scripting engines** *(~1000x)* as these are **way too slow**!  
-It's no C++ but I find it pretty good performance wise.  
+The MicroExpressionEvaluator is a highly efficient .NET class library, optimized for parsing and evaluating complex nested conditional logic expressions in C#. Tailored for real-time scenarios, it offers unparalleled performance with minimal CPU usage, ideal for dynamic rule evaluation in various applications like financial modeling, gaming logic, and more.
 
-The [test class] evaluates and compares our results and performance of all 74 tests against the ".NET Compiler Platform" (aka "Roslyn") ("Microsoft.CodeAnalysis.CSharp.Scripting.EvaluateAsync()")
+## Key Features
 
-## Example **In-** *--and-->* **Output**
-It is **very low on CPU and super-fast** at solving expressions such as:
+- **Rapid Evaluation**: Executes complex logic expressions extremely fast.
+- **Type Support**: Handles expressions involving `decimal`, `boolean`, and `string`.
+- **Operator Versatility**: Supports logical (`||`, `&&`, `!`, etc.) and comparison (`==`, `!=`, `<`, `>`, etc.) operators.
+- **Nested and Grouped Expressions**: Efficiently simplifies and evaluates expressions with multiple nested and logical groups.
+- **Security and Independence**: Operates without regular expressions or scripting engines, reducing security risks and dependencies.
+
+## Performance Advantage
+
+Benchmarked to outperform traditional methods and tools, the MicroExpressionEvaluator avoids slow methods like regular expressions (about **100x** faster) and scripting engines (around **1000x** faster), making it a superior choice for applications requiring high-speed logic processing.
+
+## Usage
+
+Simple and straightforward: 
+
+```csharp
+bool result = MicroEx.Evaluate("your_expression_here");
+```
+
+Replace `your_expression_here` with your logic expression.
+
+## Examples
+**Input** *-->* **Output**
 ```sh
 7 > -7                                                      -->   Returns: true
 true == true != false                                       -->   Returns: true
@@ -38,46 +43,24 @@ true == true != false                                       -->   Returns: true
 "text123" == true                                           -->   Throws (expected) exception: "Invalid input! Operator can only be applied to operands of type 'bool'."
 ```
 
-## Usage
-as simple as:
-```sh
-bool result = MicroEx.Evaluate("(true || false) && false");
-```
+## Real-World Applications
 
-## Real life examples
-For example, I would have rules such as the following and replace the placeholders `%xxx%` with live values from variables then evaluate:
-```sh
-%CXB% == true && (%OOP% == "ACTIVE" || %OOP% == "STANDBY")
-%PRE% >= 29,25 && %PRE% <= 78,5
-```
+Perfect for systems requiring constant rule evaluation under varying conditions, such as in automated decision-making, system monitoring, or configuration validation.
 
-## Info
-It is purpose build and therefore also safer than using scripting engines. Scripting engines potentially allow scripts to cause harm and to break-out. This could be used to hijack your machine by injecting malicious payloads. At least in my use-cases this is something I needed to worry about.  
-  
-It required **no extra libs, or 3rd party packages**.
+## Alternatives Considered
 
-It can easily be adapted to other .Net versions or languages (TBD).  
-  
-For now, it only does logic and cannot yet solve math problems (TBD).  
-Adding other operators, as for example: `{ "+", "-", "*", "/", "^", "%" }` to solve simple (or more complex) math would be easy using this as a base framework.
+Other projects like NCalc, Jint, NLua, and Roslyn were evaluated but found to be slower or less suitable for the specific needs.
 
-## Alternatives
-These really cool projects did not work for me, or were just **too slow**:
--   NCalc
--   Jint
--   NLua
--   Dynamic Expresso
--   Flee
--   CS-Script
--   Roslyn (Microsoft)
--   MathParser
--   Eval Expression.NET
--   ...
+## Future Directions
 
-## Closing words
-I created this a while ago, but finally managed to make the repo public.  
-**I hope this can help you!!**  
-Enjoy and let me know what you like, dislike or what you would do differently  
+Plans to expand capabilities include support for mathematical operations and additional operators (`+`, `-`, `*`, `/`, `^`, `%`).
 
-   [one simple class]: <https://github.com/webermania/MicroExpressionEvaluator/blob/master/MicroExpressionEvaluator/MicroEx.cs>
-   [test class]: <https://github.com/webermania/MicroExpressionEvaluator/blob/master/TestAndDemo/Program.cs>
+## Contributions
+
+Your contributions, issues, and suggestions are welcome to enhance this project further.
+
+## Licensing
+
+Please refer to the provided license information for usage guidelines.
+
+**We welcome your feedback and hope you find the MicroExpressionEvaluator invaluable in your projects!**
