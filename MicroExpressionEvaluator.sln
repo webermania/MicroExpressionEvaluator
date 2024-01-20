@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroExpressionEvaluatorDotNetFramework", "MicroExpressionEvaluatorDotNetFramework\MicroExpressionEvaluatorDotNetFramework.csproj", "{B0774D52-0C2D-4A96-8BBC-62638C8263FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroExpressionEvaluator", "MicroExpressionEvaluator\MicroExpressionEvaluator.csproj", "{B0774D52-0C2D-4A96-8BBC-62638C8263FA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAndDemo", "TestAndDemo\TestAndDemo.csproj", "{82D2C8A9-2A29-4BC7-B386-59B9CFEFEE82}"
 EndProject
