@@ -7,7 +7,7 @@ In my case, for dynamic and configurable rules that need to be constantly re-che
 Source of my expressions can be local or remote, contained in a json, yaml, xml, hcl or any format.
 
 ## My solution
-I wrote this .Net (Core 3.1) class library (in [one simple class], in under 250 lines of code, with help of recursive functions) to evaluate logic expressions.  
+I wrote this .Net class library (in [one simple class], in under 250 lines of code, with help of recursive functions) to evaluate logic expressions.  
   
 It can currently deal with types: `{ decimal, boolean, string }`.  
 It understands the following operators: `{ "||", "&&", "!=", "==", "<=", ">=", "<", ">" }`  
@@ -79,5 +79,5 @@ I created this a while ago, but finally managed to make the repo public.
 **I hope this can help you!!**  
 Enjoy and let me know what you like, dislike or what you would do differently  
 
-   [one simple class]: <https://github.com/webermania/MicroExpressionEvaluator/blob/master/MicroExpressionEvaluator/MicroEx.cs>
+   [one simple class]: <https://github.com/webermania/MicroExpressionEvaluator/blob/master/MicroExpressionEvaluatorDotNetFramework/MicroEx.cs>
    [test class]: <https://github.com/webermania/MicroExpressionEvaluator/blob/master/TestAndDemo/Program.cs>
