@@ -3,7 +3,7 @@
 
 ## Overview
 
-The MicroExpressionEvaluator is a highly efficient .NET class library, optimized for parsing and evaluating complex nested conditional logic expressions in C#. Tailored for real-time scenarios, it offers unparalleled performance with minimal CPU usage, ideal for dynamic rule evaluation in various applications like financial modeling, gaming logic, and more.
+The MicroExpressionEvaluator is a highly efficient .NET class library, optimized for parsing and evaluating complex nested conditional logic expressions (microexpressions) in C#. Tailored for real-time scenarios, it offers unparalleled performance with minimal CPU usage, ideal for dynamic rule evaluation in various applications like financial modeling, gaming logic, and more.
 
 ## Key Features
 
