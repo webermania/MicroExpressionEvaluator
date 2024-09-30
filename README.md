@@ -1,66 +1,110 @@
+# MicroExpressionEvaluator
 
-# C# MicroExpressionEvaluator: High-Performance Logic Parsing for Real-Time Applications
+## High-Performance C# Logical Expression Parser and Evaluator
 
-## Overview
+**MicroExpressionEvaluator** is a blazing-fast, lightweight .NET library for parsing and evaluating complex nested logical expressions in C#. Designed for real-time applications, it delivers unparalleled performance with minimal CPU usage, making it perfect for dynamic rule evaluation in financial modeling, gaming logic, automation systems, and more.
 
-The MicroExpressionEvaluator is a highly efficient .NET class library, optimized for parsing and evaluating complex nested conditional logic expressions (microexpressions) in C#. Tailored for real-time scenarios, it offers unparalleled performance with minimal CPU usage, ideal for dynamic rule evaluation in various applications like financial modeling, gaming logic, and more.
+---
 
-## Key Features
+## Table of Contents
 
-- **Rapid Evaluation**: Executes complex logic expressions extremely fast.
-- **Type Support**: Handles expressions involving `decimal`, `boolean`, and `string`.
-- **Operator Versatility**: Supports logical (`||`, `&&`, `!`, etc.) and comparison (`==`, `!=`, `<`, `>`, etc.) operators.
-- **Nested and Grouped Expressions**: Efficiently simplifies and evaluates expressions with multiple nested and logical groups.
-- **Security and Independence**: Operates without regular expressions or scripting engines, reducing security risks and dependencies.
+- [Features](#features)
+- [Why MicroExpressionEvaluator?](#why-microexpressionevaluator)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Real-World Applications](#real-world-applications)
+- [Performance Comparison](#performance-comparison)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
 
-## Performance Advantage
+---
 
-Benchmarked to outperform traditional methods and tools, the MicroExpressionEvaluator avoids slow methods like regular expressions (about **100x**) and scripting engines (around **1000x**), making it a superior choice for applications requiring high-speed logic processing.
+## Features
+
+- **Blazing Fast Performance**: Executes complex logical expressions with minimal CPU overhead.
+- **Multi-Type Support**: Handles `decimal`, `bool`, and `string` data types.
+- **Comprehensive Operator Support**: Includes logical (`||`, `&&`, `!`) and comparison (`==`, `!=`, `<`, `>`, `<=`, `>=`) operators.
+- **Nested and Grouped Expressions**: Efficiently evaluates expressions with multiple nesting levels and logical groupings.
+- **Secure and Lightweight**: No reliance on regular expressions or scripting engines, reducing security risks and external dependencies.
+
+## Why MicroExpressionEvaluator?
+
+MicroExpressionEvaluator significantly outperforms traditional methods:
+
+- **Up to 100x Faster Than Regular Expressions**: Avoids the overhead of regex-based parsing.
+- **Up to 1000x Faster Than Scripting Engines**: Eliminates latency from external scripting engines like Roslyn or NLua.
+- **Optimized for Real-Time Applications**: Ideal for scenarios requiring instantaneous logic evaluation without compromising accuracy.
 
 ## Usage
 
-Simple and straightforward: 
+Using MicroExpressionEvaluator is straightforward. Pass your logical expression as a string to the `Evaluate` method:
 
 ```csharp
-bool result = MicroEx.Evaluate("your_expression_here");
+using MicroExpressionEvaluator;
+
+bool result = MicroEx.Evaluate("your_logical_expression");
 ```
 
-Replace `your_expression_here` with your logic expression.
+### Example
+
+```csharp
+bool result = MicroEx.Evaluate("false != true && !(-0.2 <= 0.1 || \"a\" == \"b\")");
+// result will be true
+```
 
 ## Examples
-**Input** *-->* **Output**
-```sh
-7 > -7                                                      -->   Returns: true
-true == true != false                                       -->   Returns: true
-(true || true) && false                                     -->   Returns: false
-!true == !(true || false)                                   -->   Returns: true
-("text123" == "text123") && (7,00000 < 7,00001)             -->   Returns: true
-10000000000,00000000000 < 10000000000,00000000001           -->   Returns: true
-(false != true) && ((true || false) || (true == false))     -->   Returns: true
-(false || (true == (false || (true == (false || true)))))   -->   Returns: true
-(true                                                       -->   Throws (expected) exception: "Invalid input! ) expected."
--7 && 7                                                     -->   Throws (expected) exception: "Invalid input! Operator can only be applied to operands of type 'bool'."
-"text123" == true                                           -->   Throws (expected) exception: "Invalid input! Operator can only be applied to operands of type 'bool'."
-```
+
+### Valid Expressions
+
+Expression | Output
+--- | ---
+`7 > -7` | `true`
+`true == true != false` | `true`
+`(true \|\| true) && false` | `false`
+`!true == !(true \|\| false)` | `true`
+`("text123" == "text123") && (7.00000 < 7.00001)` | `true`
+`10000000000.00000000000 < 10000000000.00000000001` | `true`
+`(false != true) && ((true \|\| false) \|\| (true == false))` | `true`
+`(false \|\| (true == (false \|\| (true == (false \|\| true)))))` | `true`
+
+### Invalid Expressions
+
+Invalid expressions throw descriptive exceptions:
+
+Expression | Exception Message
+--- | ---
+`(true` | `Invalid input! ')' expected.`
+`-7 && 7` | `Invalid input! Operator '&&' can only be applied to operands of type 'bool'.`
+`"text123" == true` | `Invalid input! Operator '==' can only be applied to operands of type 'string' or 'bool'.`
 
 ## Real-World Applications
 
-Perfect for systems requiring constant rule evaluation under varying conditions, such as in automated decision-making, system monitoring, or configuration validation.
+- **Financial Modeling**: Real-time evaluation of complex financial conditions and business rules.
+- **Game Development**: Efficient processing of game logic and AI decision-making.
+- **Automation Systems**: Dynamic decision-making in automated workflows and processes.
+- **System Monitoring**: Rapid validation and enforcement of system configurations and policies.
 
-## Alternatives Considered
+## Performance Comparison
 
-Other projects like NCalc, Jint, NLua, and Roslyn were evaluated but found to be slower or less suitable for the specific needs.
+Compared to other tools like **NCalc**, **Jint**, **NLua**, and **Roslyn**, MicroExpressionEvaluator offers:
 
-## Future Directions
+- **Superior Speed**: Outperforms in execution time, making it ideal for performance-critical applications.
+- **Enhanced Security**: Reduces risks by not relying on external scripting engines or regular expressions.
+- **Lightweight Footprint**: Minimal dependencies ensure easy integration and deployment.
 
-Plans to expand capabilities include support for mathematical operations and additional operators (`+`, `-`, `*`, `/`, `^`, `%`).
+## Roadmap
 
-## Contributions
+Upcoming enhancements:
 
-Your contributions, issues, and suggestions are welcome to enhance this project further.
+- **Mathematical Operations**: Support for arithmetic operators (`+`, `-`, `*`, `/`, `^`, `%`).
+- **Extended Data Types**: Enhanced handling of various numeric types and collections.
+- **Custom Functions and Variables**: Ability to define custom functions and variables within expressions.
 
-## Licensing
+## Contributing
 
-Please refer to the provided license information for usage guidelines.
+We welcome contributions! If you have ideas, suggestions, or encounter any issues, please open an [issue](https://github.com/webermania/MicroExpressionEvaluator/issues) or submit a pull request.
 
-**We welcome your feedback and hope you find the MicroExpressionEvaluator invaluable in your projects!**
+
+---
+
+**We appreciate your feedback and hope MicroExpressionEvaluator becomes an invaluable tool in your projects!**
